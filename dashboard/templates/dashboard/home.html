@@ -1,24 +1,264 @@
 {% load static %}
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 
 <head>
     <meta charset="UTF-8">
-    <title>Home Page</title>
-    <!-- رابط Bootstrap المحلي -->
+    <title>عيادة الأسنان</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <style>
+        body {
+            direction: rtl;
+            text-align: right;
+        }
 
+        .hero {
+            background-color: #e3f2fd;
+            padding: 60px 0;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+        }
+
+        .line-underline {
+            width: 60px;
+            height: 4px;
+            background-color: #0d6efd;
+            /* يمكنك تغيير اللون */
+            border-radius: 3px;
+            animation: slideIn 1s ease forwards;
+            opacity: 0;
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateX(-30px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* ✅ السلايدر بطول الشاشة */
+        .carousel,
+        .carousel-inner,
+        .carousel-item {
+            height: 100vh;
+        }
+
+        .carousel-item img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* ✅ Navbar شفافة */
+        .navbar {
+            transition: background-color 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        .navbar.transparent {
+            background-color: rgba(255, 255, 255, 0);
+        }
+
+        .navbar.solid {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ✅ تحسين عنوان السلايدر */
+        .carousel-caption {
+            bottom: 30%;
+        }
+
+        .carousel-caption h5,
+        .carousel-caption {
+            background: rgba(0, 0, 0, 0.5);
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="container mt-5">
-        <h1 class="text-center">مرحبًا بك في موقعي!</h1>
-        <p class="text-muted text-center">صفحة رئيسية باستخدام Django وBootstrap</p>
-        <div class="text-center">
-            <a class="btn btn-primary" href="#">زر تجريبي</a>
+
+    <!-- ✅ Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top transparent">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">عيادة الدكتور قيت</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="تبديل التنقل">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link active" href="#">الرئيسية</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">عن العيادة</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">الخدمات</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">حجز موعد</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">تسجيل دخول </a></li>
+                </ul>
+            </div>
         </div>
-    </div>
+    </nav>
+
+    <!-- ✅ Hero Section -->
+
+    {% load static %}
+    <header>
+        <div id="headerCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+
+                <!-- ✅ الشريحة الأولى -->
+                <div class="carousel-item active">
+                    <img src="{% static 'images/1.jpg' %}" class="d-block w-100" alt="ابتسامة صحية">
+                    <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+                        <h5>مرحبًا بكم في عيادتنا</h5>
+                        <p>نقدم أفضل خدمات طب الأسنان بأحدث الأجهزة.</p>
+                        <a href="#" class="btn btn-primary">احجز الآن</a>
+                    </div>
+                </div>
+
+                <!-- ✅ الشريحة الثانية -->
+                <div class="carousel-item">
+                    <img src="{% static 'images/2.jpg' %}" class="d-block w-100" alt="خدمات متكاملة">
+                    <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+                        <h5>ابتسامتك مسؤوليتنا</h5>
+                        <p>تقويم، تبييض، زراعة، علاج... كل ما تحتاجه تحت سقف واحد.</p>
+                    </div>
+                </div>
+
+                <!-- ✅ الشريحة الثالثة -->
+                <div class="carousel-item">
+                    <img src="{% static 'images/3.jpg' %}" class="d-block w-100" alt="عيادة حديثة">
+                    <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+                        <h5>عيادة حديثة ومتطورة</h5>
+                        <p>مجهزة بأحدث التقنيات الرقمية لضمان راحة المريض.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ✅ أزرار التنقل -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#headerCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#headerCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+    </header>
+
+    </section>
+
+    <!-- ✅ About Section -->
+    <section class="bg-light py-5">
+        <div class="container text-center">
+            <h2 class="mb-4 fw-bold ">عن العيادة</h2>
+            <div class="line-underline mx-auto my-3"></div>
+            <p>عيادتنا مجهزة بأحدث التقنيات لتوفير أفضل رعاية صحية فموية، مع فريق محترف يهتم براحتك وصحتك.</p>
+
+        </div>
+    </section>
+    <section class="py-5">
+        <div class="container  text-center">
+            <h2 class="mb-4 fw-bold ">الأطباء</h2>
+            <div class="line-underline mx-auto my-3"></div>
+            <p>عيادتنا مجهزة بأحدث التقنيات لتوفير أفضل رعاية صحية فموية، مع فريق محترف يهتم براحتك وصحتك.</p>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                        <img src="{% static 'images/1.jpg' %}" class="card-img-top" alt="خدمة الأسنان">
+                        <div class="card-body">
+                            <h5 class="card-title">الدكتور قيت </h5>
+
+                            <p class="card-text">تنظيف احترافي لإزالة الجير والبلاك والحفاظ على صحة فمك.</p>
+                            <a href="{% url 'doct1'%}" class="btn btn-primary">اقرأ المزيد</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                        <img src="{% static 'images/2.jpg' %}" class="card-img-top" alt="خدمة الأسنان">
+                        <div class="card-body">
+                            <h5 class="card-title">الدكتور قيت </h5>
+
+                            <p class="card-text">تنظيف احترافي لإزالة الجير والبلاك والحفاظ على صحة فمك.</p>
+                            <a href="#" class="btn btn-primary">اقرأ المزيد</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                        <img src="{% static 'images/3.jpg' %}" class="card-img-top" alt="خدمة الأسنان">
+                        <div class="card-body">
+                            <h5 class="card-title">الدكتور قيت </h5>
+
+                            <p class="card-text">تنظيف احترافي لإزالة الجير والبلاك والحفاظ على صحة فمك.</p>
+                            <a href="#" class="btn btn-primary">اقرأ المزيد</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ✅ Services Section -->
+    <section class="bg-light py-5">
+        <div class="container  text-center">
+            <h2 class="mb-4 fw-bold">خدماتنا</h2>
+            <div class="line-underline mx-auto my-3"></div>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">تنظيف الأسنان</h5>
+
+                            <p class="card-text">تنظيف احترافي لإزالة الجير والبلاك والحفاظ على صحة فمك.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">تقويم الأسنان</h5>
+                            <p class="card-text">علاج تشوهات الأسنان والفك لتحسين الابتسامة.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">تبييض الأسنان</h5>
+                            <p class="card-text">حلول سريعة وآمنة لتفتيح لون الأسنان.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ✅ Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        جميع الحقوق محفوظة &copy; 2025 - عيادة الدكتور قيت
+    </footer>
+    <!-- ✅ سكريبت لجعل الـ Navbar تتحول من شفافة إلى بيضاء عند التمرير -->
+    <script>
+        window.addEventListener('scroll', function () {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.remove('transparent');
+                navbar.classList.add('solid');
+            } else {
+                navbar.classList.remove('solid');
+                navbar.classList.add('transparent');
+            }
+        });
+    </script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </body>
 
 </html>
