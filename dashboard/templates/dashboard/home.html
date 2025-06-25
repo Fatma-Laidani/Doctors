@@ -1,0 +1,24 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <!-- رابط Bootstrap المحلي -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">مرحبًا بك في موقعي!</h1>
+        <p class="text-muted text-center">صفحة رئيسية باستخدام Django وBootstrap</p>
+        <div class="text-center">
+            <a class="btn btn-primary" href="#">زر تجريبي</a>
+        </div>
+    </div>
+</body>
+
+</html>
