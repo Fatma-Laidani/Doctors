@@ -10,7 +10,7 @@ class DoctorForm(forms.ModelForm):
             'specialty': 'التخصص',
             'phone': 'رقم الهاتف',
             'email': 'البريد الإلكتروني',
-            'image': 'صورة الطبيب',
+            'photo': 'صورة الطبيب',
             'bio'  :'إضافة',
         }
         widgets = {
@@ -18,6 +18,6 @@ class DoctorForm(forms.ModelForm):
             'specialty': forms.TextInput(attrs={'class': 'form-control',}),
             'phone': forms.TextInput(attrs={'class': 'form-control', }),
             'email': forms.EmailInput(attrs={'class': 'form-control', }),
-            'image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+            'photo': forms.ClearableFileInput(attrs={'class': 'form-control form-control-sm',}) ,
             'bio'  : forms.Textarea(attrs={'class': 'form-control','rows': 4,}),
         }
