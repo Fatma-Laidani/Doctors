@@ -51,8 +51,36 @@ def add_doctor(request):
             messages.success(request, "✅ تم إضافة الطبيب بنجاح")
             return redirect('add_doctor')  # أو صفحة النجاح
         else:
+            # print(form.errors)  # ← سيعرض الأخطاء في التيرمنال
             messages.error(request, "❌ تحقق من صحة البيانات")
     else:
         form = DoctorForm()
 
     return render(request, 'dashboard/add_doctor.html', {'form': form})
+
+
+
+
+@login_required(login_url='login')
+def all_doctors(request):
+    doctors =Doctor.objects.all()
+    return render(request, 'dashboard/all_doctors.html', {'doctors': doctors})
+
+@login_required(login_url='login')
+def edit_doctor(request, doctor_id):
+    doctor = Doctor.objects.get(id=doctor_id)
+    if request.method == 'POST':
+        form = DoctorForm(request.POST, request.FILES, instance=doctor)
+        if form.is_valid():
+            form.save()
+            return redirect('all_doctors')
+    else:
+        form = DoctorForm(instance=doctor)
+    return render(request, 'dashboard/edit_doctor.html', {'form': form, 'doctor': doctor})
+
+
+@login_required(login_url='login')
+def delete_doctor(request, doctor_id):
+    doctor = Doctor.objects.get(id=doctor_id)
+    doctor.delete()
+    return redirect('all_doctors')
