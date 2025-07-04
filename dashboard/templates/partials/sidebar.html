@@ -1,0 +1,24 @@
+<div id="sidebar" class="sidebar bg-light border-start pt-4">
+    <ul class="nav flex-column text-end pe-3">
+        <li><a href="{% url 'dashboard' %}" class="nav-link text-dark">🏠 الرئيسية</a></li>
+        <!-- <li><a href="#" class="nav-link text-dark">👥 الأطباء</a></li> -->
+        <!-- قائمة الأطباء -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-dark" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                👥 الأطباء
+            </a>
+            <ul class="dropdown-menu text-end shadow">
+                <li><a class="dropdown-item" href="#">📋 كل الأطباء</a></li>
+                <li><a class="dropdown-item" href="{% url 'add_doctor' %}">➕ إضافة طبيب</a></li>
+                <li><a class="dropdown-item text-danger" href="#">🗑️ حذف طبيب</a></li>
+                <li><a class="dropdown-item" href="#">✏️ تعديل طبيب</a></li>
+            </ul>
+        </li>
+        <li><a href="#" class="nav-link text-dark">👥 المستخدمين</a></li>
+        <li><a href="#" class="nav-link text-dark">🦷 الخدمات</a></li>
+        <li><a href="#" class="nav-link text-dark">👥 المرضى</a></li>
+        <li><a href="#" class="nav-link text-dark">📅 المواعيد</a></li>
+        <li><a href="#" class="nav-link text-dark">⚙️ الإعدادات</a></li>
+        <li><a href="{% url 'logout' %}" class="nav-link text-danger">🚪 خروج</a></li>
+    </ul>
+</div>

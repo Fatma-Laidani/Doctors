@@ -1,0 +1,61 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}إضافة طبيب{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <!-- <h2 class="mb-4 text-end">➕ إضافة طبيب جديد</h2> -->
+    <h3 class="mb-4">➕ إضافة طبيب</h3>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %}" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    <!-- <form method="post" enctype="multipart/form-data" class="text-end">
+        {% csrf_token %}
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="name" class="form-label">الاسم الكامل</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="مثال: د. أسامة زروقي">
+            </div>
+
+            <div class="col-md-6">
+                <label for="specialty" class="form-label">التخصص</label>
+                <input type="text" class="form-control" id="specialty" name="specialty"
+                    placeholder="مثال: جراحة فم وأسنان">
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">البريد الإلكتروني</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="مثال: doctor@example.com">
+        </div>
+
+        <div class="mb-3">
+            <label for="phone" class="form-label">رقم الهاتف</label>
+            <input type="text" class="form-control" id="phone" name="phone" placeholder="مثال: 0555 55 55 55">
+        </div>
+
+        <div class="mb-3">
+            <label for="bio" class="form-label">السيرة الذاتية</label>
+            <textarea class="form-control" id="bio" name="bio" rows="4" placeholder="معلومات عن الطبيب..."></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="photo" class="form-label">صورة الطبيب</label>
+            <input type="file" class="form-control" id="photo" name="photo">
+        </div>
+
+        <button type="submit" class="btn btn-primary">💾 حفظ</button>
+    </form> -->
+    <form method="post" enctype="multipart/form-data" class="bg-light p-4 rounded shadow">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">💾 حفظ</button>
+    </form>
+
+</div>
+{% endblock %}
