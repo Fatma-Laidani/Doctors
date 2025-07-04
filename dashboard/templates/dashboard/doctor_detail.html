@@ -18,6 +18,8 @@
 
             <a href="{% url 'edit_doctor' doctor.id %}" class="btn btn-warning">✏️ تعديل</a>
             <a href="{% url 'all_doctors' %}" class="btn btn-secondary">⬅️ رجوع</a>
+            <a href="{% url 'doctor_pdf' doctor.id %}" class="btn btn-outline-primary">📄 طباعة PDF</a>
+
         </div>
     </div>
 </div>

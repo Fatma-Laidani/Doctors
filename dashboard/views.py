@@ -8,6 +8,10 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 
+# pdf
+from weasyprint import HTML
+from django.template.loader import render_to_string
+from django.http import HttpResponse
 
 
 def login_view(request):
@@ -96,3 +100,16 @@ def delete_doctor(request, doctor_id):
 def doctor_detail(request, doctor_id):
     doctor = get_object_or_404(Doctor, id=doctor_id)
     return render(request, 'dashboard/doctor_detail.html', {'doctor': doctor})
+
+
+
+
+def doctor_pdf(request, doctor_id):
+    doctor = Doctor.objects.get(id=doctor_id)
+    html_string = render_to_string('dashboard/doctor_pdf.html', {'doctor': doctor})
+    html = HTML(string=html_string, base_url=request.build_absolute_uri())
+
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'filename=doctor_{doctor.id}.pdf'
+    html.write_pdf(response)
+    return response
