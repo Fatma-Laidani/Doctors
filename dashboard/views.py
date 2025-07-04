@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 # from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
@@ -6,6 +6,7 @@ from .forms import DoctorForm
 from doctors.models import Doctor
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 
 
@@ -63,8 +64,14 @@ def add_doctor(request):
 
 @login_required(login_url='login')
 def all_doctors(request):
-    doctors =Doctor.objects.all()
-    return render(request, 'dashboard/all_doctors.html', {'doctors': doctors})
+    query = request.GET.get('q')
+    if query:
+        doctors = Doctor.objects.filter(
+            Q(name__icontains=query) | Q(specialty__icontains=query)
+        )
+    else:
+       doctors =Doctor.objects.all()
+    return render(request, 'dashboard/all_doctors.html', {'doctors': doctors, 'query': query})
 
 @login_required(login_url='login')
 def edit_doctor(request, doctor_id):
@@ -84,3 +91,8 @@ def delete_doctor(request, doctor_id):
     doctor = Doctor.objects.get(id=doctor_id)
     doctor.delete()
     return redirect('all_doctors')
+
+@login_required(login_url='login')
+def doctor_detail(request, doctor_id):
+    doctor = get_object_or_404(Doctor, id=doctor_id)
+    return render(request, 'dashboard/doctor_detail.html', {'doctor': doctor})

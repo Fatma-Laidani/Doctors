@@ -1,0 +1,24 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}تفاصيل الطبيب {% endblock %}
+
+{% block content %}
+<div class="container">
+    <h3 class="text-center mb-4"> تفاصيل الطبيب</h3>
+
+    <div class="card mx-auto shadow" style="max-width: 500px;">
+        {% if doctor.photo %}
+        <img src="{{ doctor.photo.url }}" class="card-img-top" alt="صورة الطبيب">
+        {% endif %}
+        <div class="card-body text-end">
+            <h5 class="card-title">🧑‍⚕️ {{ doctor.name }}</h5>
+            <p class="card-text"><strong>التخصص:</strong> {{ doctor.specialty }}</p>
+            <p class="card-text"><strong>الهاتف:</strong> {{ doctor.phone }}</p>
+            <p class="card-text"><strong>البريد الإلكتروني:</strong> {{ doctor.email }}</p>
+
+            <a href="{% url 'edit_doctor' doctor.id %}" class="btn btn-warning">✏️ تعديل</a>
+            <a href="{% url 'all_doctors' %}" class="btn btn-secondary">⬅️ رجوع</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

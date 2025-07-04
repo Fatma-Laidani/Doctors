@@ -5,6 +5,17 @@
 {% block content %}
 <div class="container">
     <h2 class="mb-4 text-center"> قائمة الأطباء</h2>
+    {% if query %}
+    <p class="text-muted text-end">نتائج البحث عن: <strong>{{ query }}</strong></p>
+    {% endif %}
+
+    <form method="GET" action="{% url 'all_doctors' %}" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="q" class="form-control text-end" placeholder="🔍 ابحث باسم الطبيب أو التخصص..."
+                value="{{ query|default_if_none:'' }}">
+            <button class="btn btn-primary" type="submit">بحث</button>
+        </div>
+    </form>
 
     <table class="table table-bordered table-striped text-end bg-white shadow-sm">
         <thead class="table-primary">
@@ -35,6 +46,8 @@
                     <a href="{% url 'edit_doctor' doctor.id %}" class="btn btn-sm btn-warning">تعديل</a>
                     <a href="{% url 'delete_doctor' doctor.id %}" class="btn btn-sm btn-danger"
                         onclick="return confirm('هل أنت متأكد من حذف هذا الطبيب؟');">حذف</a>
+                    <a href="{% url 'doctor_detail' doctor.id %}" class="btn btn-sm btn-info text-white">👁️ عرض</a>
+
                 </td>
             </tr>
             {% empty %}
